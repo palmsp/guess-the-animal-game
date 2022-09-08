@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: guess-the-animal
+  mongodb:
+    embedded:
+      version: 4.0.2
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org:
+      springframework:
+        test:
+          context:
+            cache:
+              DEBUG

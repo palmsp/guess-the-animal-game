@@ -1,0 +1,13 @@
+package com.palms.animal.game;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class GuessTheAnimalApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GuessTheAnimalApplication.class, args);
+	}
+
+}
