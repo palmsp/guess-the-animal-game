@@ -2,22 +2,21 @@ package com.palms.animal.game.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel("DTO for real animal info")
+@ApiModel("DTO for assumption")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RealAnimal {
+public class Assumption {
 
-    @ApiModelProperty("Property name")
-    private String name;
+    @ApiModelProperty("Value can be animal or question")
+    private String value;
 
-    @ApiModelProperty("List of properties")
-    private List<AnimalProperty> properties;
+    @ApiModelProperty("True if it's animal")
+    private Boolean isAnimal;
 }

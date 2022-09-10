@@ -2,14 +2,12 @@ package com.palms.animal.game.rest;
 
 import static com.palms.animal.game.rest.ApiEndpoints.ANIMAL_GAME;
 import static com.palms.animal.game.rest.ApiEndpoints.DIFFERENCE;
-import static com.palms.animal.game.rest.ApiEndpoints.GUESSED_ANIMAL;
+import static com.palms.animal.game.rest.ApiEndpoints.ASSUMPTION;
 import static com.palms.animal.game.rest.ApiEndpoints.PROPERTIES;
-import static com.palms.animal.game.rest.ApiEndpoints.REAL_ANIMAL;
 
-import com.palms.animal.game.domain.Animal;
 import com.palms.animal.game.dto.AnimalProperty;
-import com.palms.animal.game.dto.RealAnimal;
-import com.palms.animal.game.service.AnimalService;
+import com.palms.animal.game.dto.Difference;
+import com.palms.animal.game.dto.Assumption;
 import com.palms.animal.game.service.PropertyService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,9 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GuessAnimalGameRS {
 
     @Autowired
-    private AnimalService animalService;
-
-    @Autowired
     private PropertyService propertyService;
 
     @GetMapping(PROPERTIES)
@@ -46,28 +41,19 @@ public class GuessAnimalGameRS {
         return propertyService.getProperties();
     }
 
-    @PostMapping(GUESSED_ANIMAL)
-    @ApiOperation("Returns guessed animal")
-    public Animal fetchGuessedAnimal(
-            @ApiParam("Properties to guess animal")
-            @RequestBody List<AnimalProperty> properties) {
-        return animalService.fetchGuessedAnimal(properties);
-    }
-
-    @PostMapping(REAL_ANIMAL)
-    @ApiOperation("Save real animal")
-    public void saveRealAnimal(
-            @ApiParam("Real animal info")
-            @RequestBody RealAnimal realAnimal) {
-        animalService.saveAnimal(realAnimal);
-    }
-
     @PostMapping(DIFFERENCE)
     @ApiOperation("Save difference between animals")
     public void saveDifferenceProperty(
             @ApiParam("Difference")
-            @RequestBody String difference) {
+            @RequestBody Difference difference) {
         propertyService.saveProperty(difference);
     }
 
+    @PostMapping(ASSUMPTION)
+    @ApiOperation("Return assumption. It can be next question or guessed animal")
+    public Assumption getAssumption(
+            @ApiParam("Property")
+            @RequestBody AnimalProperty property) {
+        return propertyService.getAssumption(property.getName(), property.getIsTypical());
+    }
 }

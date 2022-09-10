@@ -18,5 +18,5 @@ public class AnimalProperty {
     private String name;
 
     @ApiModelProperty("Shows is it typical for animal or not")
-    private boolean typical;
+    private Boolean isTypical;
 }
